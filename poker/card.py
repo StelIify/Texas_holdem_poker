@@ -18,4 +18,25 @@ class Card():
     def __repr__(self):
         return f"Card('{self.rank}', '{self.suit}')"
 
+    def __eq__(self, other):
+        return self.rank == other.rank and self.suit == other.suit
+
+    @classmethod
+    def create_52_cards(cls):
+
+        return [
+            cls(rank, suit)
+            for suit in cls.SUITS
+            for rank in cls.RANKS
+        ]
+        # cards = []
+        #
+        # for suit in cls.SUITS:
+        #     for rank in cls.RANKS:
+        #         cards.append(cls(rank, suit))
+        # return cards
+
+
+
+
 

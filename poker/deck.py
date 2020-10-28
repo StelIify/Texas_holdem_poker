@@ -4,3 +4,4 @@ class Deck():
 
     def add_card(self, cards):
         self.cards.extend(cards)
+
