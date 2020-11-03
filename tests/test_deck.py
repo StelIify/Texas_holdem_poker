@@ -1,9 +1,9 @@
 import unittest
-from poker.deck import Deck
-from poker.card import Card
+
+from poker import Card, Deck
 
 
-class TestDeck(unittest.TestCase):
+class DeckTest(unittest.TestCase):
     def test_stores_no_cards_at_start(self):
         deck = Deck()
         self.assertEqual(

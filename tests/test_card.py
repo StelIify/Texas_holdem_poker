@@ -1,5 +1,6 @@
 import unittest
-from poker.card import Card
+
+from poker import Card
 
 
 class CardTest(unittest.TestCase):
