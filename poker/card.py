@@ -1,4 +1,4 @@
-class Card():
+class Card:
 
     SUITS = ("Hearts", "Diamonds", "Spades", "Clubs")
     RANKS = ("2", "3", "4", "5", "6", "7", "8", "9", "10",
@@ -11,6 +11,7 @@ class Card():
             raise ValueError(f"Invalid suit. Your value is '{suit}'. It must be one of the following {self.SUITS}")
         self.rank = rank
         self.suit = suit
+        self.rank_index = self.RANKS.index(rank)
 
     def __str__(self):
         return f"{self.rank} of {self.suit}"
@@ -21,6 +22,9 @@ class Card():
     def __eq__(self, other):
         return self.rank == other.rank and self.suit == other.suit
 
+    def __lt__(self, other):
+        return self.rank_index < other.rank_index
+
     @classmethod
     def create_52_cards(cls):
 
@@ -29,12 +33,6 @@ class Card():
             for suit in cls.SUITS
             for rank in cls.RANKS
         ]
-        # cards = []
-        #
-        # for suit in cls.SUITS:
-        #     for rank in cls.RANKS:
-        #         cards.append(cls(rank, suit))
-        # return cards
 
 
 
