@@ -12,7 +12,8 @@ class HandTest(unittest.TestCase):
         hand = Hand(cards=cards)
         self.assertEqual(
             hand.cards,
-            cards
+            [Card("King", "Hearts"),
+             Card("Ace", "Spades")]
         )
 
     def test_figures_out_high_card_is_best_card(self):
@@ -37,8 +38,8 @@ class HandTest(unittest.TestCase):
             "Pair"
         )
 
-    def test_fifures_out_two_pairs_is_best_card(self):
-        card = [
+    def test_figures_out_two_pairs_is_best_card(self):
+        cards = [
             Card("Ace", "Diamonds"),
             Card("Ace", "Clubs"),
             Card("King", "Diamonds"),
@@ -46,8 +47,38 @@ class HandTest(unittest.TestCase):
             Card("5", "Clubs"),
         ]
 
-        hand = Hand(card)
+        hand = Hand(cards)
         self.assertEqual(
             hand.best_card(),
             "Two Pair"
+        )
+
+    def test_figures_out_three_of_the_kind_is_best_card(self):
+        cards = [
+            Card("Ace", "Diamonds"),
+            Card("Ace", "Clubs"),
+            Card("Ace", "Diamonds"),
+            Card("King", "Clubs"),
+            Card("5", "Clubs"),
+        ]
+
+        hand = Hand(cards)
+        self.assertEqual(
+            hand.best_card(),
+            "Three of a Kind"
+        )
+
+    def test_figures_out_straight_is_best_card(self):
+        cards = [
+            Card("6", "Diamonds"),
+            Card("7", "Hearts"),
+            Card("8", "Clubs"),
+            Card("9", "Spades"),
+            Card("10", "Diamonds")
+        ]
+
+        hand = Hand(cards)
+        self.assertEqual(
+            hand.best_card(),
+            "Straight"
         )
