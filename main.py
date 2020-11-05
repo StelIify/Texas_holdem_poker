@@ -6,11 +6,12 @@ from poker import Card, Deck, Hand
 # deck.add_card(cards)
 # print(deck.cards)
 
-cards = [Card("Ace", "Diamonds"),
-            Card("Ace", "Clubs"),
-            Card("King", "Diamonds"),
-            Card("King", "Clubs"),
-            Card("5", "Clubs")]
+cards = [Card("6", "Diamonds"),
+            Card("7", "Diamonds"),
+            Card("8", "Diamonds"),
+            Card("9", "Diamonds"),
+            Card("10", "Diamonds")
+          ]
 hand = Hand(cards)
 print(hand.best_card())
 

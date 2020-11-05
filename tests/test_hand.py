@@ -3,7 +3,7 @@ from poker import Card, Hand
 
 
 class HandTest(unittest.TestCase):
-    def test_recives_and_stores_cards(self):
+    def test_recieves_and_stores_cards(self):
         cards = [
             Card("Ace", "Spades"),
             Card("King", "Hearts")
@@ -82,3 +82,43 @@ class HandTest(unittest.TestCase):
             hand.best_card(),
             "Straight"
         )
+
+    def test_figures_out_flush_is_best_card(self):
+        cards = [Card(rank = rank, suit="Hearts")
+                 for rank in ["2", "5", "10", "Queen", "King"]
+                 ]
+        hand = Hand(cards)
+        self.assertEqual(hand.best_card(), "Flush")
+
+    def test_figures_out_full_house_is_best_card(self):
+        cards = [
+            Card("Ace", "Diamonds"),
+            Card("Ace", "Hearts"),
+            Card("Ace", "Clubs"),
+            Card("King", "Spades"),
+            Card("King", "Diamonds")
+        ]
+        hand = Hand(cards)
+        self.assertEqual(hand.best_card(), "Full House")
+
+    def test_figures_out_four_of_a_kind_is_best_card(self):
+        cards = [
+            Card("Ace", "Diamonds"),
+            Card("Ace", "Hearts"),
+            Card("Ace", "Clubs"),
+            Card("Ace", "Spades"),
+            Card("King", "Diamonds")
+        ]
+        hand = Hand(cards)
+        self.assertEqual(hand.best_card(), "Four of a Kind")
+
+    def test_figures_out_straight_flush_is_best_card(self):
+        cards = [
+            Card("6", "Diamonds"),
+            Card("7", "Diamonds"),
+            Card("8", "Diamonds"),
+            Card("9", "Diamonds"),
+            Card("10", "Diamonds")
+        ]
+        hand = Hand(cards)
+        self.assertEqual(hand.best_card(), "Straight Flush")
