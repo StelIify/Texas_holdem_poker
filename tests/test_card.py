@@ -5,7 +5,7 @@ from poker import Card
 
 class CardTest(unittest.TestCase):
     def test_has_rank(self):
-        card = Card("Queen", "Hearts")
+        card = Card(rank="Queen", suit="Hearts")
         self.assertEqual(card.rank, "Queen")
 
     def test_has_suit(self):

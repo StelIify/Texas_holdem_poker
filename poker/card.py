@@ -1,5 +1,4 @@
 class Card:
-
     SUITS = ("Hearts", "Diamonds", "Spades", "Clubs")
     RANKS = ("2", "3", "4", "5", "6", "7", "8", "9", "10",
              "Jack", "Queen", "King", "Ace")
@@ -29,12 +28,7 @@ class Card:
     def create_52_cards(cls):
 
         return [
-            cls(rank, suit)
+            cls(rank=rank, suit=suit)
             for suit in cls.SUITS
             for rank in cls.RANKS
         ]
-
-
-
-
-
