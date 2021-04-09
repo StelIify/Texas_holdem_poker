@@ -1,12 +1,15 @@
 class Hand():
-    def __init__(self, cards):
-        copy = cards[:]
-        copy.sort()
-        self.cards = copy
+    def __init__(self):
+        self.cards = []
+
+    def __repr__(self):
+        cards_as_strings = [str(card) for card in self.cards]
+        return ", ".join(cards_as_strings)
 
     @property
     def _rank_validation_from_best_to_worst(self):
         return (
+            ("Royal Flush", self._is_royal_flush()),
             ("Straight Flush", self._is_straight_flush()),
             ("Four of a Kind", self._is_four_of_a_kind()),
             ("Full House", self._is_full_house()),
@@ -15,14 +18,29 @@ class Hand():
             ("Three of a Kind", self._is_three_of_a_kind()),
             ("Two Pair", self._is_two_pair()),
             ("Pair", self._is_pair()),
-            ("High Card", self._is_high_card())
+            ("High Card", self._is_high_card()),
+            ("No Cards", self._no_cards())
         )
 
-    def best_card(self):
+    def best_rank(self):
         for rank in self._rank_validation_from_best_to_worst:
             name, validate_func = rank
             if validate_func:
                 return name
+
+    def add_cards(self, cards):
+        copy = self.cards[:]
+        copy.extend(cards)
+        copy.sort()
+        self.cards = copy
+
+    def _is_royal_flush(self):
+        is_straight_flush = self._is_straight_flush()
+        if not is_straight_flush:
+            return False
+
+        is_royal = self.cards[-1].rank == "Ace"
+        return is_straight_flush and is_royal
 
     def _is_straight_flush(self):
         return self._is_straight() and self._is_flush()
@@ -62,7 +80,10 @@ class Hand():
         return len(rank_with_pairs) == 1
 
     def _is_high_card(self):
-        return True
+        return len(self.cards) >= 2
+
+    def _no_cards(self):
+        return len(self.cards) == 0
 
     def _ranks_with_count(self, count):
         return {
